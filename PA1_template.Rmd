@@ -45,7 +45,9 @@ head(total.perday)
 
 ```{r}
 range(total.perday$steps)
+# png(filename="fig1.png")
 hist(total.perday$steps, main = "total steps taken per day", xlab = "no. of steps", breaks=seq(0, 22000,1000), xlim=c(0, 25000))
+# dev.off()
 
 ```
 
@@ -65,7 +67,9 @@ mean.perday
 
 ```{r}
 mean.perint<-aggregate(steps~interval,data, mean, na.rm=TRUE)
+# png(filename = "fig2.png")
 plot(mean.perint$interval, mean.perint$steps, type="l", main="average steps during a day", ylab="no. of steps", xlab="time in 5-minutes-interval (0=0:00-0:05am; 2355=11:55-12:00pm)")
+# dev.off()
 ```
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
@@ -151,5 +155,7 @@ head(data.new)
 ```{r}
 mean.perint.weekend<-aggregate(steps~interval+weekend, data.new, mean)
 names(mean.perint.weekend)<-c("interval", "weekend", "mean.steps")
+# png(filename = "fig3.png")
 xyplot(mean.perint.weekend$mean.steps ~ mean.perint.weekend$interval | mean.perint.weekend$weekend, layout = c(1, 2), type="l", ylab = "number of steps", xlab="interval")
+# dev.off()
 ```
