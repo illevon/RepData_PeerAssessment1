@@ -121,7 +121,9 @@ head(data.new)
 
 ```{r}
 total.perday.new<-aggregate(steps~date, data.new, sum)
-hist(total.perday.new$steps, main = "total steps taken per day", xlab = "no. of steps", breaks=seq(0, 22000,1000), xlim=c(0, 25000))
+# png(filename = "fig3.png")
+hist(total.perday.new$steps, main = "total steps taken per day (NAs imputed)", xlab = "no. of steps", breaks=seq(0, 22000,1000), xlim=c(0, 25000))
+# dev.off()
 median.perday.new<-median(total.perday.new$steps)
 median.perday.new
 mean.perday.new<-mean(total.perday.new$steps)
@@ -155,7 +157,7 @@ head(data.new)
 ```{r}
 mean.perint.weekend<-aggregate(steps~interval+weekend, data.new, mean)
 names(mean.perint.weekend)<-c("interval", "weekend", "mean.steps")
-# png(filename = "fig3.png")
+# png(filename = "fig4.png")
 xyplot(mean.perint.weekend$mean.steps ~ mean.perint.weekend$interval | mean.perint.weekend$weekend, layout = c(1, 2), type="l", ylab = "number of steps", xlab="interval")
 # dev.off()
 ```
